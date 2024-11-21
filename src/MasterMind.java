@@ -22,55 +22,59 @@ public class MasterMind {
         tablero=new Tablero();
     }
 
-        // Constructor de partidas ya empezadas (rev)
+    // Constructor de partidas ya empezadas (hecho)
 
     public MasterMind(String nombreArchivo) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(nombreArchivo))) {
-            this.tablero = new Tablero();
-            String linea = reader.readLine();
-            this.jugadaOculta = new Jugada(linea);
-            this.numFichas = linea.length();
-            while ((linea = reader.readLine()) != null) {
-                String[] partes = linea.split(" ");
-                if (partes.length == 3) {                   // Validar formato de la línea
-                    Jugada jugada = new Jugada(partes[0]);
-                    int aciertos = Integer.parseInt(partes[1]);
-                    int descolocados = Integer.parseInt(partes[2]);
-                    Pistas pistas = new Pistas(aciertos, descolocados);
+        BufferedReader entrada=null;
+        try {
+            entrada=new BufferedReader(new FileReader(nombreArchivo));
+            String cadena= entrada.readLine();
+            this.tablero=new Tablero();
+            this.jugadaOculta=new Jugada(cadena);
+            while ((cadena=entrada.readLine())!=null) {
+                String[] partes=cadena.split(" ");
+                if (partes.length==3) {         // Comprueba que el formato está bien
+                    Jugada jugada=new Jugada(partes[0]);
+                    int aciertos=Integer.parseInt(partes[1]);
+                    int descolocados=Integer.parseInt(partes[2]);
+                    Pistas pistas=new Pistas(aciertos, descolocados);
                     tablero.insertar(jugada, pistas);
                 } else {
-                    System.out.println("Línea mal formateada: " + linea);
+                    System.out.println("ERROR. LINEA MAL FORMATEADA");
                 }
             }
         } catch (IOException ex) {
             System.out.println("ERROR AL RECUPERAR LA PARTIDA");
+        } finally {
+            try {
+                if (entrada!=null) {
+                    entrada.close();
+                }
+            } catch (IOException ex) {
+                System.out.println("ERROR AL CERRAR EL ARCHIVO");
+            }
         }
     }
 
 
-    // Guardar partida (rev)
+    // Guardar partida (hecho)
 
     public void guardarPartida(String nombreArchivo) {
-        BufferedWriter writer = null;
+        PrintWriter salida = null;
         try {
-            writer = new BufferedWriter(new FileWriter(nombreArchivo));
-            writer.write(jugadaOculta.toString());
-            writer.newLine();
+            salida = new PrintWriter(nombreArchivo);
+            salida.println(jugadaOculta.toString());
             for (int i = 0; i < tablero.getNumJugadas(); i++) {
-                writer.write(tablero.getJugadas()[i].toString() + " ");
-                writer.write(tablero.getResultados()[i].toString());
-                writer.newLine();
+                salida.print(tablero.getJugadas()[i].toString() + " ");
+                salida.print(tablero.getResultados()[i].toString());
+                salida.println();
             }
             System.out.println("Partida guardada correctamente en " + nombreArchivo);
         } catch (IOException ex) {
             System.out.println("ERROR AL GUARDAR LA PARTIDA");
         } finally {
-            try {
-                if (writer != null) {
-                    writer.close();
-                }
-            } catch (IOException e) {
-                System.out.println("Error al cerrar el archivo");
+            if (salida != null) {
+                salida.close();
             }
         }
     }
