@@ -75,31 +75,32 @@ public class Jugada {
     // Comprobación de la jugada (rev)
 
     public Pistas comprobar(Jugada oculta) {
-        boolean[] encontradasActual = new boolean[fichas.length];
-        boolean[] encontradasJugada = new boolean[fichas.length];
-        int contAciertos=0;
-        int contDescolocados=0;
+        boolean[] encontradasOculta=new boolean[fichas.length];
+        boolean[] encontradasJugada=new boolean[fichas.length];
+        int countAciertos=0;
+        int countDescolocados=0;
         for (int i=0; i<fichas.length; i++) {
             if (this.fichas[i]==oculta.fichas[i]) {
-                encontradasActual[i]=true;
+                encontradasOculta[i]=true;
                 encontradasJugada[i]=true;
-                contAciertos++;
+                countAciertos++;
             }
         }
-        boolean encontrada = false;
-        for (int i=0; i<fichas.length && !encontrada; i++) {
-            if (!encontradasActual[i]) {
-                for (int j=0; j<fichas.length; j++) {
-                    if (!encontradasJugada[j]&&this.fichas[i]==oculta.fichas[j]) {
-                        encontradasActual[i]=true;
-                        encontradasJugada[j]=true;
-                        contDescolocados++;
-                        encontrada = true;
+        boolean salir;
+        for (int i=0; i<fichas.length; i++) {
+            salir=false;
+            if (!encontradasJugada[i]) {
+                for (int j=0; !salir&&j<fichas.length; j++) {
+                    if (!encontradasOculta[j]&&this.fichas[i]==oculta.fichas[j]) {
+                        encontradasOculta[j]=true;
+                        encontradasJugada[i]=true;
+                        countDescolocados++;
+                        salir=true;
                     }
                 }
             }
         }
-        return new Pistas(contAciertos,contDescolocados);
+        return new Pistas(countAciertos,countDescolocados);
     }
 
     // Visualizar (dado ya)
