@@ -31,6 +31,7 @@ public class MasterMind {
             String cadena= entrada.readLine();
             this.tablero=new Tablero();
             this.jugadaOculta=new Jugada(cadena);
+            this.numFichas=cadena.length();
             while ((cadena=entrada.readLine())!=null) {
                 String[] partes=cadena.split(" ");
                 if (partes.length==3) {         // Comprueba que el formato está bien
