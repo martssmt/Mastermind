@@ -34,7 +34,7 @@ public class MasterMind {
             this.numFichas=cadena.length();
             while ((cadena=entrada.readLine())!=null) {
                 String[] partes=cadena.split(" ");
-                if (partes.length==3) {         // Comprueba que el formato está bien
+                if (partes.length==3) {         // Comprueba que el formato estÃ© bien
                     Jugada jugada=new Jugada(partes[0]);
                     int aciertos=Integer.parseInt(partes[1]);
                     int descolocados=Integer.parseInt(partes[2]);
@@ -112,12 +112,12 @@ public class MasterMind {
 
     public static void main(String[] args) {
         MasterMind masterMind;
-        if (Teclado.leerSiNo("¿Quieres recuperar una partida? (S/N): ") == 'S') {
+        if (Teclado.leerSiNo("Â¿Quieres recuperar una partida? (S/N): ") == 'S') {
             String nombreArchivo = Teclado.leerString("Nombre del archivo: ");
             masterMind = new MasterMind(nombreArchivo);
             masterMind.getTablero().visualizar();
         } else {
-            int fichas = Teclado.leerEntero(4, 6, "Número de fichas de las jugadas (4 - 6): ");
+            int fichas = Teclado.leerEntero(4, 6, "NÃºmero de fichas de las jugadas (4 - 6): ");
             masterMind = new MasterMind(fichas);
         }
         masterMind.jugar();

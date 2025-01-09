@@ -25,22 +25,18 @@ public class Jugada {
         this.fichas= new Color[cadena.length()];
         for (int i=0; i<cadena.length(); i++) {
             switch (cadena.charAt(i)) {
-                case 'R': {
+                case 'R':
                     fichas[i]=Color.ROJO;
                     break;
-                }
-                case 'V': {
+                case 'V':
                     fichas[i]=Color.VERDE;
                     break;
-                }
-                case 'A': {
+                case 'A':
                     fichas[i]=Color.AMARILLO;
                     break;
-                }
-                case 'P': {
+                case 'P':
                     fichas[i]=Color.PURPURA;
                     break;
-                }
             }
         }
     }
@@ -52,27 +48,23 @@ public class Jugada {
         for (int i=0; i<numFichas; i++) {
             int numColor=(int) (Math.random()*4);
             switch (numColor) {
-                case 0: {
+                case 0:
                     fichas[i]=Color.ROJO;
                     break;
-                }
-                case 1: {
+                case 1:
                     fichas[i]=Color.VERDE;
                     break;
-                }
-                case 2: {
+                case 2:
                     fichas[i]=Color.AMARILLO;
                     break;
-                }
-                case 3: {
+                case 3:
                     fichas[i]=Color.PURPURA;
                     break;
-                }
             }
         }
     }
 
-    // Comprobación de la jugada (rev)
+    // Comprobacion de la jugada (hecho)
 
     public Pistas comprobar(Jugada oculta) {
         boolean[] encontradasOculta=new boolean[fichas.length];

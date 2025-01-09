@@ -16,19 +16,15 @@ public class Tablero {
        this.numJugadas=0;
     }
 
-        // Getter numJugadas (hecho)
+        // Getters (hecho)
 
     public int getNumJugadas() {
         return numJugadas;
     }
 
-        // Getter jugadas (hecho)
-
     public Jugada[] getJugadas() {
         return jugadas;
     }
-
-        // Getter resultados (pistas) (hecho)
 
     public Pistas[] getResultados() {
         return pistas;
